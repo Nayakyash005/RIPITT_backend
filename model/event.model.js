@@ -3,19 +3,19 @@ const Schema = mongoose;
 const EventSchema = new Schema({
   description: {
     type: "string",
-    require: true,
+    required: true,
   },
   title: {
     type: "string",
-    require: true,
+    required: true,
   },
   image_url: {
     type: "string",
-    require: false,
+    required: false,
   },
   link: {
     type: "string",
-    // require:true,
+    // required:true,
   },
   startDate: {
     type: Date,
