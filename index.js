@@ -1,13 +1,17 @@
-import bodyParser from "body-parser";
 import "dotenv/config";
-import express from "express";
 import cors from "cors";
+import express from "express";
+import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
-// import connectDb from "./configuration/db";
+
 import connectDb from "./configuration/db.js";
+import blogRouter from "./routes/blog.js";
+import eventRouter from "./routes/event.js";
+import projectRouter from "./routes/project.js";
+
 const app = express();
-const PORT = 8801;
-const FRONTEND_URL = "http://localhost:3000";
+const PORT = process.env.PORT || 8801;
+const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
 
 // CORS configuration
 const corsOptions = {
@@ -20,10 +24,16 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 // app.use(logger);
+
+// Routs
+app.use("/api/blog", blogRouter);
+app.use("/api/event", eventRouter);
+app.use("/api/project", projectRouter);
+
 async function main() {
   await connectDb();
   app.listen(PORT, () => {
-    console.log("your backend is live at http://localhost:8801");
+    console.log(`your backend is live at http://localhost:${PORT}`);
   });
 }
 

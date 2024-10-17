@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-const Schema = mongoose;
-const EventSchema = new Schema({
+
+const EventSchema = new mongoose.Schema({
   description: {
     type: "string",
     required: true,
@@ -22,3 +22,7 @@ const EventSchema = new Schema({
     required: true, // If you want it to be mandatory
   },
 });
+
+const Event = mongoose.model("Event", EventSchema);
+
+export default Event;
