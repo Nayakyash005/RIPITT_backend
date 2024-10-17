@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-const DATABASEURL =
-  "mongodb+srv://brijendra:FCVY928u6kHpguiz@cluster0.kipuqkw.mongodb.net/ripitt/";
+
+const DATABASEURL = process.env.MONGODB_URL;
 const connectDb = async () => {
   console.log("connecting to database ......");
   try {
