@@ -1,11 +1,12 @@
 import Event from "../model/event.model.js";
 import { tryCatch } from "../lib/util.js";
 
-export const addEvent = async (req, res) => {
+export const addEvent = tryCatch(async (req, res) => {
   const { description, title, image_url, link, startDate } = req.body;
+  console.log(req.body);
 
   if (!description || !title || !startDate)
-    res.json({ success: false, message: "missing required feilds" });
+    return res.json({ success: false, message: "missing required feilds" });
 
   const data = await Event.create({
     description,
@@ -16,7 +17,7 @@ export const addEvent = async (req, res) => {
   });
 
   res.json({ success: true, data });
-};
+});
 
 export const deleteEvent = async (req, res) => {
   const { id } = req.body;
@@ -26,6 +27,7 @@ export const deleteEvent = async (req, res) => {
 
 export const updateEvent = tryCatch(async (req, res) => {
   const { id, description, title, image_url, link, startDate } = req.body;
+  console.log(req.body);
   const data = await Event.updateOne(
     { _id: id },
     {
@@ -40,13 +42,13 @@ export const updateEvent = tryCatch(async (req, res) => {
 });
 
 export const getEvent = tryCatch(async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.query;
   let data;
 
   if (id) {
     data = await Event.findById(id);
   } else {
-    data = await Event.find();
+    data = await Event.find().sort({ startDate: 1 });
   }
 
   return res.json({ success: true, data });
