@@ -2,7 +2,7 @@ import Event from "../model/event.model.js";
 import { tryCatch } from "../lib/util.js";
 
 export const addEvent = tryCatch(async (req, res) => {
-  const { description, title, image_url, link, startDate } = req.body;
+  const { description, title, image_url, link, startDate, startTime, endDate, endTime } = req.body;
   console.log(req.body);
 
   if (!description || !title || !startDate)
@@ -14,6 +14,9 @@ export const addEvent = tryCatch(async (req, res) => {
     image_url,
     link,
     startDate: new Date(startDate),
+    startTime,
+    endDate: new Date(endDate),
+    endTime,
   });
 
   res.json({ success: true, data });
@@ -26,7 +29,7 @@ export const deleteEvent = async (req, res) => {
 };
 
 export const updateEvent = tryCatch(async (req, res) => {
-  const { id, description, title, image_url, link, startDate } = req.body;
+  const { id, description, title, image_url, link, startDate, startTime, endDate, endTime } = req.body;
   console.log(req.body);
   const data = await Event.updateOne(
     { _id: id },
@@ -36,6 +39,9 @@ export const updateEvent = tryCatch(async (req, res) => {
       image_url,
       link,
       startDate: startDate ? new Date(startDate) : undefined,
+      startTime,
+      endDate: endDate ? new Date(endDate) : undefined,
+      endTime,
     }
   );
   res.json({ success: true, data });
