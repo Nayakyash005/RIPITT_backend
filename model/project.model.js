@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-const Schema = mongoose;
-const EventSchema = new Schema({
+
+const ProjectSchema = new mongoose.Schema({
   title: {
     type: "string",
     require: true,
@@ -11,8 +11,18 @@ const EventSchema = new Schema({
   impact: {
     type: "string",
   },
-  date: {
+  industry: {
+    type: "string",
+  },
+  startDate: {
+    type: Date,
+    required: true,
+  },
+  endDate: {
     type: Date,
     required: true,
   },
 });
+
+const Project = mongoose.model("Project", ProjectSchema);
+export default Project;

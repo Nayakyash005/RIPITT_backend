@@ -10,8 +10,8 @@ import eventRouter from "./routes/event.js";
 import projectRouter from "./routes/project.js";
 
 const app = express();
-const PORT = process.env.PORT || 8801;
-const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
+const PORT = process.env.PORT || 3000;
+const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5173";
 
 // CORS configuration
 const corsOptions = {
